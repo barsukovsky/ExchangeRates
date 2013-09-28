@@ -1,0 +1,36 @@
+﻿@model System.Collections.Generic.IDictionary<Currency, Money>
+
+@using NMoneys
+
+@{
+    ViewBag.Title = "Курсы валют";
+    
+    var currencies = new List<Currency>();
+
+    var isoCodes = Enum.GetNames(typeof(CurrencyIsoCode));
+    foreach(var isoCode in isoCodes)
+    {
+        currencies.Add(Currency.Get(isoCode));    
+    }
+}
+
+@Html.DropDownList("currencies",
+        new SelectList(currencies, "IsoCode", "EnglishName", Model.Values.First().CurrencyCode),
+        new { onchange = "location.replace(document.getElementById('currencies').value)" });
+
+<table>
+    @foreach (var currency in Model.Keys)
+    {
+        <tr>
+            <td>
+                @currency.IsoCode
+                (@currency.EnglishName)
+            </td>
+            <td>
+                @Model[currency]
+            </td>
+        </tr>
+    }
+</table>
+
+

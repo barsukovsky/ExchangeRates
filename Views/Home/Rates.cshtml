@@ -14,23 +14,44 @@
     }
 }
 
-@Html.DropDownList("currencies",
-        new SelectList(currencies, "IsoCode", "EnglishName", Model.Values.First().CurrencyCode),
-        new { onchange = "location.replace(document.getElementById('currencies').value)" });
-
 <table>
-    @foreach (var currency in Model.Keys)
-    {
+    <thead>
         <tr>
-            <td>
-                @currency.IsoCode
-                (@currency.EnglishName)
-            </td>
-            <td>
-                @Model[currency]
-            </td>
+            <th>
+                @using (Html.BeginForm("Add", "Home"))
+                {
+                    @Html.DropDownList("code", new SelectList(currencies, "IsoCode", "EnglishName"))
+                    <input type="submit" value="Показать" />
+                }
+            </th>
+            <th>
+                @Html.DropDownList("currencies",
+                    new SelectList(currencies, "IsoCode", "EnglishName", Model.Values.FirstOrDefault().CurrencyCode),
+                    new { onchange = "location.replace(document.getElementById('currencies').value)" })
+            </th>
         </tr>
-    }
+    </thead>
+    <tbody>
+        @foreach (var currency in Model.Keys)
+        {
+            <tr>
+                <td>
+                    @currency.EnglishName
+                    (@currency.IsoCode)
+                </td>
+                <td>
+                    @Model[currency]
+                </td>
+                <td>
+                    @using(Html.BeginForm("Delete", "Home"))
+                    {
+                        @Html.Hidden("code", currency.IsoCode)
+                        <input type="submit" value="Скрыть" />
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
 </table>
 
 

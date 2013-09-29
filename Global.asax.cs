@@ -24,6 +24,7 @@ namespace ExchangeRates
             RouteConfig.RegisterRoutes(RouteTable.Routes);
 
             ExchangeRateProvider.Factory = () => new YahooExchangeRateProvider();
+            ModelBinders.Binders.Add(typeof(List<CurrencyIsoCode>), new CurrencyListModelBinder());
         }
     }
 }

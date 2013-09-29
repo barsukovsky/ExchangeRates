@@ -1,17 +1,27 @@
 ﻿.wrapper {
-    width: 500px;
+    width: 550px;
     margin: 60px auto;
     text-align: center;
 }
 
-    .wrapper table {
-        width: 100%;
-        border: 1px solid black;
-        border-collapse: collapse;
-        font: 30px/1.25 sans-serif, arial;
+table {
+    width: 100%;
+    font: 30px/1.25 sans-serif, arial;
+    border-collapse: collapse;
+}
+
+    table select {
+        max-width: 150px;
     }
-    .wrapper td {
+
+tbody tr, tbody td {
+    border: 1px solid black;
+}
+
+    tbody tr:hover {
+        background-color: azure;
+    }
+
+    tbody td {
         padding: 5px;
-        border: 1px solid black;
-        border-collapse: collapse;
     }

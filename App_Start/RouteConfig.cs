@@ -15,6 +15,18 @@ namespace ExchangeRates
 
             routes.MapRoute(
                 name: "",
+                url: "add/",
+                defaults: new { controller = "Home", action = "Add" }
+            );
+
+            routes.MapRoute(
+                name: "",
+                url: "delete/",
+                defaults: new { controller = "Home", action = "Delete" }
+            );
+
+            routes.MapRoute(
+                name: "",
                 url: "{isocode}/",
                 defaults: new { controller = "Home", action = "Rates" },
                 constraints: new { isocode = @"(?i)^[a-z]{3}$" }
